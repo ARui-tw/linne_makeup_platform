@@ -1,9 +1,10 @@
 version: 2
 updates:
   - package-ecosystem: npm
-    directory: '/'
+    directory: "/"
     schedule:
       interval: weekly
-      time: '03:00'
+      time: "03:00"
+    target-branch: dev
     open-pull-requests-limit: 10
     versioning-strategy: increase
