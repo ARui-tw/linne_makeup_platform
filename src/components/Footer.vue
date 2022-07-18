@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col lg:flex-row">
+  <div class="mb-3 flex flex-col lg:flex-row">
     <div class="text-xs md:text-base">版權所有</div>
     <SizeBox width="15" />
     <div class="text-xs md:text-base">
