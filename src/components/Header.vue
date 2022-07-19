@@ -1,5 +1,5 @@
 <template>
-  <div class="mt-8 flex flex-row items-center justify-between">
+  <div class="mt-4 flex flex-row items-center justify-between">
     <div>
       <img
         src="@/assets/img/logo.svg"

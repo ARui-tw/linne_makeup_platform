@@ -47,7 +47,6 @@ const useBreakpoint = () => {
     setBreakpoint()
     window.addEventListener('resize', () => {
       setBreakpoint()
-      console.log(breakpoints)
     })
   })
 
