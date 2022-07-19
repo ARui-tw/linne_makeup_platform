@@ -2,7 +2,6 @@
   <div
     class="mt-5 flex flex-col items-center justify-between md:mt-10 md:flex-row"
   >
-    <!-- class="mt-5 grid grid-cols-3 gap-4 md:mt-10 md:grid-cols-7" -->
     <div v-for="menuItem in menuItems">
       <router-link
         :to="menuItem.path"
@@ -69,7 +68,7 @@ const menuItems = [
   },
   {
     name: "彩妝論述",
-    englishName: "MakeupPapers",
+    englishName: "Makeup Papers",
     path: "/makeupPapers",
   },
   {
