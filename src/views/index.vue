@@ -6,7 +6,7 @@
     <SizeBox height="20" />
     <div
       class="-ml-3 flex w-full flex-row bg-local bg-left-top bg-no-repeat"
-      style="background-image: url(src/assets/img/AI_Lab.svg)"
+      :style="{ backgroundImage: `url(${backgroundImage})` }"
     >
       <SizeBox width="290" class="shrink-0" />
       <div
@@ -16,14 +16,14 @@
           <div class="ml-5">
             <div class="relative">
               <div class="flex justify-center">
-                <!-- FIXME: animate will flash and the code is dirty.   -->
+                <!-- FIXME: animate will flash and the code is dirty. -->
                 <router-link
                   :to="menuItem.path"
                   @mouseenter="menuItem.hover = true"
                   @mouseleave="menuItem.hover = false"
                 >
                   <img
-                    :src="`src/assets/img/circles/${menuItem.svgName}.svg`"
+                    :src="getImageUrl(`img/circles/${menuItem.svgName}.svg`)"
                   />
                 </router-link>
               </div>
@@ -69,6 +69,11 @@
 <script setup>
 import { ref } from "vue";
 import SizeBox from "@/components/SizeBox.vue";
+import backgroundImage from "@/assets/img/AI_Lab.svg";
+
+const getImageUrl = (name) => {
+  return new URL(`../assets/${name}`, import.meta.url).href;
+};
 
 const menuItems = ref([
   {
