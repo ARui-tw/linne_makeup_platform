@@ -1,71 +1,55 @@
 <template>
-  <div class="mt-5">
-    <div class="max-h-72 w-full justify-center overflow-hidden">
-      <img src="@/assets/img/index_img.svg" alt="" class="w-full" />
-    </div>
-    <SizeBox height="20" />
-    <div
-      class="-ml-3 flex w-full flex-row bg-local bg-left-top bg-no-repeat"
-      :style="
-        breakpoints.md ? { backgroundImage: `url(${backgroundImage})` } : {}
-      "
-    >
-      <SizeBox width="290" class="shrink-0" v-show="breakpoints.md" />
-      <div
-        class="my-24 grid w-full grid-flow-row grid-cols-2 justify-between gap-4"
-      >
-        <div v-for="menuItem in menuItems">
-          <div class="ml-5">
-            <div class="relative">
-              <div class="flex justify-center">
-                <!-- FIXME: animate will flash and the code is dirty. -->
-                <router-link
-                  :to="menuItem.path"
-                  @mouseenter="menuItem.hover = true"
-                  @mouseleave="menuItem.hover = false"
-                >
-                  <img
-                    :src="getImageUrl(`img/circles/${menuItem.svgName}.svg`)"
-                    :style="
-                      breakpoints.w > 1000 ? {} : { 'max-height': '120px' }
-                    "
-                  />
-                </router-link>
-              </div>
-              <router-link
-                :to="menuItem.path"
-                @mouseenter="menuItem.hover = true"
-                @mouseleave="menuItem.hover = false"
-              >
-                <div
-                  class="absolute left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2 text-center text-brown-400"
-                >
-                  {{ menuItem.name }}
-                  <br />
-                  {{ menuItem.englishName }}
-                </div>
-              </router-link>
-              <router-link
-                :to="menuItem.path"
-                @mouseenter="menuItem.hover = true"
-                @mouseleave="menuItem.hover = false"
-              >
-                <transition>
-                  <div
-                    v-show="menuItem.hover"
-                    class="absolute left-1/2 bottom-0 -translate-y-1/2 -translate-x-1/2 whitespace-nowrap text-start text-sm text-brown-400"
-                    :class="breakpoints.w > 1000 ? '' : 'hidden'"
-                  >
-                    <span class="font-bold">
-                      Welcome to Linné Makeup Laboratory
-                    </span>
-                    <br />
-                    <div v-html="menuItem.explainText"></div>
-                  </div>
-                </transition>
-              </router-link>
-            </div>
+  <div
+    class="my-24 grid w-full grid-flow-row grid-cols-2 justify-between gap-4"
+  >
+    <div v-for="menuItem in menuItems">
+      <div class="ml-5">
+        <div class="relative">
+          <div class="flex justify-center">
+            <!-- FIXME: animate will flash and the code is dirty. -->
+            <router-link
+              :to="menuItem.path"
+              @mouseenter="menuItem.hover = true"
+              @mouseleave="menuItem.hover = false"
+            >
+              <img
+                :src="getImageUrl(`img/circles/${menuItem.svgName}.svg`)"
+                :style="breakpoints.w > 1000 ? {} : { 'max-height': '120px' }"
+              />
+            </router-link>
           </div>
+          <router-link
+            :to="menuItem.path"
+            @mouseenter="menuItem.hover = true"
+            @mouseleave="menuItem.hover = false"
+          >
+            <div
+              class="absolute left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2 text-center text-brown-400"
+            >
+              {{ menuItem.name }}
+              <br />
+              {{ menuItem.englishName }}
+            </div>
+          </router-link>
+          <router-link
+            :to="menuItem.path"
+            @mouseenter="menuItem.hover = true"
+            @mouseleave="menuItem.hover = false"
+          >
+            <transition>
+              <div
+                v-show="menuItem.hover"
+                class="absolute left-1/2 bottom-0 -translate-y-1/2 -translate-x-1/2 whitespace-nowrap text-start text-sm text-brown-400"
+                :class="breakpoints.w > 1000 ? '' : 'hidden'"
+              >
+                <span class="font-bold">
+                  Welcome to Linné Makeup Laboratory
+                </span>
+                <br />
+                <div v-html="menuItem.explainText"></div>
+              </div>
+            </transition>
+          </router-link>
         </div>
       </div>
     </div>
@@ -76,7 +60,7 @@
 import { ref } from "vue";
 import useBreakpoint from "@/plugins/breakpoints";
 import SizeBox from "@/components/SizeBox.vue";
-import backgroundImage from "@/assets/img/AI_Lab.svg";
+import AiLab from "@/components/AiLab.vue";
 
 const breakpoints = useBreakpoint();
 const getImageUrl = (name) => {
@@ -148,9 +132,5 @@ const menuItems = ref([
 .v-enter-from,
 .v-leave-to {
   opacity: 0;
-}
-
-img {
-  width: auto;
 }
 </style>
