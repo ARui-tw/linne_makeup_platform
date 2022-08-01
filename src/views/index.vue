@@ -6,9 +6,11 @@
     <SizeBox height="20" />
     <div
       class="-ml-3 flex w-full flex-row bg-local bg-left-top bg-no-repeat"
-      :style="{ backgroundImage: `url(${backgroundImage})` }"
+      :style="
+        breakpoints.md ? { backgroundImage: `url(${backgroundImage})` } : {}
+      "
     >
-      <SizeBox width="290" class="shrink-0" />
+      <SizeBox width="290" class="shrink-0" v-show="breakpoints.md" />
       <div
         class="my-24 grid w-full grid-flow-row grid-cols-2 justify-between gap-4"
       >
@@ -24,6 +26,9 @@
                 >
                   <img
                     :src="getImageUrl(`img/circles/${menuItem.svgName}.svg`)"
+                    :style="
+                      breakpoints.w > 1000 ? {} : { 'max-height': '120px' }
+                    "
                   />
                 </router-link>
               </div>
@@ -33,7 +38,7 @@
                 @mouseleave="menuItem.hover = false"
               >
                 <div
-                  class="absolute left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2 text-start text-brown-400"
+                  class="absolute left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2 text-center text-brown-400"
                 >
                   {{ menuItem.name }}
                   <br />
@@ -49,6 +54,7 @@
                   <div
                     v-show="menuItem.hover"
                     class="absolute left-1/2 bottom-0 -translate-y-1/2 -translate-x-1/2 whitespace-nowrap text-start text-sm text-brown-400"
+                    :class="breakpoints.w > 1000 ? '' : 'hidden'"
                   >
                     <span class="font-bold">
                       Welcome to Linné Makeup Laboratory
@@ -68,9 +74,11 @@
 
 <script setup>
 import { ref } from "vue";
+import useBreakpoint from "@/plugins/breakpoints";
 import SizeBox from "@/components/SizeBox.vue";
 import backgroundImage from "@/assets/img/AI_Lab.svg";
 
+const breakpoints = useBreakpoint();
 const getImageUrl = (name) => {
   return new URL(`../assets/${name}`, import.meta.url).href;
 };
@@ -131,7 +139,7 @@ const menuItems = ref([
 ]);
 </script>
 
-<style>
+<style scoped>
 .v-enter-active,
 .v-leave-active {
   transition: opacity 0.5s ease;
@@ -140,5 +148,9 @@ const menuItems = ref([
 .v-enter-from,
 .v-leave-to {
   opacity: 0;
+}
+
+img {
+  width: auto;
 }
 </style>
