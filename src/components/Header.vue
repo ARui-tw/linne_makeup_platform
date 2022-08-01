@@ -1,12 +1,12 @@
 <template>
   <div class="mt-4 flex flex-row items-center justify-between">
-    <div>
+    <router-link to="/">
       <img
         src="@/assets/img/logo.svg"
         alt="logo"
         :width="breakpoints.md ? 350 : breakpoints.sm ? 250 : 200"
       />
-    </div>
+    </router-link>
     <div>
       <img
         src="@/assets/img/login_btn.svg"

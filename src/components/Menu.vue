@@ -44,7 +44,7 @@ const menuItems = [
   {
     name: "首頁故事",
     englishName: "Home",
-    path: "/",
+    path: "/home",
   },
   {
     name: "關於我們",
