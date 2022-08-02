@@ -7,7 +7,8 @@ import MakeupPapers from './views/MakeupPapers.vue'
 import MakeupPhotos from './views/MakeupPhotos/index.vue'
 import MakeupPhotosUpload from './views/MakeupPhotos/Upload.vue'
 import MakeupPhotosCertificate from './views/MakeupPhotos/Certificate.vue'
-import MakeupScore from './views/MakeupScore.vue'
+import MakeupScoreRelative from './views/MakeupScore/Relative.vue'
+import MakeupScoreRelativeCertificate from './views/MakeupScore/RelativeCertificate.vue'
 
 import NotFound from './views/NotFound.vue'
 
@@ -23,6 +24,7 @@ export const routes = [
   { path: '/makeupPhotos', component: MakeupPhotos, meta: { title: 'Makeup Photos' } },
   { path: '/makeupPhotos/upload', component: MakeupPhotosUpload, meta: { title: 'Makeup Photos Upload' } },
   { path: '/makeupPhotos/certificate', component: MakeupPhotosCertificate, meta: { title: 'Makeup Photos Certificate' } },
-  { path: '/makeupScore', component: MakeupScore, meta: { title: 'Makeup Score' } },
+  { path: '/makeupScore/relative', component: MakeupScoreRelative, meta: { title: 'Makeup Score Relative' } },
+  { path: '/makeupScore/relative/certificate', component: MakeupScoreRelativeCertificate, meta: { title: 'Makeup Score Relative' } },
   { path: '/:path(.*)', component: NotFound },
 ]
