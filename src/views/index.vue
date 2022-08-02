@@ -59,8 +59,6 @@
 <script setup>
 import { ref } from "vue";
 import useBreakpoint from "@/plugins/breakpoints";
-import SizeBox from "@/components/SizeBox.vue";
-import AiLab from "@/components/AiLab.vue";
 
 const breakpoints = useBreakpoint();
 const getImageUrl = (name) => {

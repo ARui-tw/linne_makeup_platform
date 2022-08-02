@@ -14,6 +14,13 @@ module.exports = {
         'brown-400': '#4E3B30'
       }
     },
+    listStyleType: {
+      none: 'none',
+      disc: 'disc',
+      decimal: 'decimal',
+      roman: 'upper-roman',
+      cjk: 'trad-chinese-informal',
+    }
   },
   plugins: [
     require('@tailwindcss/forms'),
