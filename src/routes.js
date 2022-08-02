@@ -15,7 +15,7 @@ import MakeupScoreAbsoluteCertificate from './views/MakeupScore/AbsoluteCertific
 
 import NotFound from './views/NotFound.vue'
 
-import auth from './middleware/auth.js'
+// import auth from './middleware/auth.js'
 
 /** @type {import('vue-router').RouterOptions['routes']} */
 export const routes = [
