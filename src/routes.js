@@ -4,7 +4,9 @@ import About from './views/About.vue'
 import Awards from './views/Awards.vue'
 import Expert from './views/Expert.vue'
 import MakeupPapers from './views/MakeupPapers.vue'
-import MakeupPhotos from './views/MakeupPhotos.vue'
+import MakeupPhotos from './views/MakeupPhotos/index.vue'
+import MakeupPhotosUpload from './views/MakeupPhotos/Upload.vue'
+import MakeupPhotosCertificate from './views/MakeupPhotos/Certificate.vue'
 import MakeupScore from './views/MakeupScore.vue'
 
 import NotFound from './views/NotFound.vue'
@@ -19,6 +21,8 @@ export const routes = [
   { path: '/expert', component: Expert, meta: { title: 'Expert' } },
   { path: '/makeupPapers', component: MakeupPapers, meta: { title: 'Makeup Papers' } },
   { path: '/makeupPhotos', component: MakeupPhotos, meta: { title: 'Makeup Photos' } },
+  { path: '/makeupPhotos/upload', component: MakeupPhotosUpload, meta: { title: 'Makeup Photos Upload' } },
+  { path: '/makeupPhotos/certificate', component: MakeupPhotosCertificate, meta: { title: 'Makeup Photos Certificate' } },
   { path: '/makeupScore', component: MakeupScore, meta: { title: 'Makeup Score' } },
   { path: '/:path(.*)', component: NotFound },
 ]
