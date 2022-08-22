@@ -1,7 +1,9 @@
 import { createRouter, createWebHistory } from "vue-router";
 
 import index from "./views/index.vue";
-import Home from "./views/Home.vue";
+import Home from "./views/Home/index.vue";
+import HomeAlgo from "./views/Home/Algo.vue";
+import HomeBigData from "./views/Home/BigData.vue";
 import About from "./views/About.vue";
 // import Awards from "./views/Awards.vue";
 import Expert from "./views/Expert.vue";
@@ -24,6 +26,8 @@ import auth from "./middleware/auth.js";
 const routes = [
   { path: "/", component: index },
   { path: "/home", component: Home, meta: { title: "Home" } },
+  { path: "/home/BigData", component: HomeBigData, meta: { title: "Home" } },
+  { path: "/home/Algo", component: HomeAlgo, meta: { title: "Home" } },
   { path: "/about", component: About, meta: { title: "About Us" } },
   // { path: "/awards", component: Awards, meta: { title: "Award" } },
   { path: "/expert", component: Expert, meta: { title: "Expert" } },
