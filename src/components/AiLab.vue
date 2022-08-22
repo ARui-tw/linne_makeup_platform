@@ -1,6 +1,6 @@
 <template>
   <div
-    class="-ml-3 flex w-full flex-row bg-local bg-left-top bg-no-repeat"
+    class="ml-0 flex w-full flex-row bg-local bg-left-top bg-no-repeat md:ml-4"
     :style="
       breakpoints.md ? { backgroundImage: `url(${backgroundImage})` } : {}
     "

@@ -1,12 +1,14 @@
 <template>
-  <div class="mx-4 sm:mx-5 md:mx-7">
-    <Header />
-    <Menu />
-    <SizeBox height="20" />
-    <div class="max-h-72 w-full justify-center overflow-hidden">
-      <img src="@/assets/img/index_img.svg" alt="" class="w-full" />
+  <div>
+    <div class="mx-4 sm:mx-5 md:mx-7">
+      <Header />
+      <Menu />
+      <SizeBox height="20" />
+      <div class="max-h-72 w-full justify-center overflow-hidden">
+        <img src="@/assets/img/index_img.svg" alt="" class="w-full" />
+      </div>
+      <SizeBox height="20" />
     </div>
-    <SizeBox height="20" />
     <AiLab>
       <main class="w-full">
         <router-view />
