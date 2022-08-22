@@ -7,7 +7,10 @@ import HomeBigData from "./views/Home/BigData.vue";
 import About from "./views/About.vue";
 // import Awards from "./views/Awards.vue";
 import Expert from "./views/Expert.vue";
-import MakeupPapers from "./views/MakeupPapers.vue";
+import MakeupPapers from "./views/MakeupPapers/index.vue";
+import MakeupPapersCombine from "./views/MakeupPapers/combine.vue";
+import MakeupPapersMTResNet from "./views/MakeupPapers/MT-ResNet.vue";
+import MakeupPapersWeb1 from "./views/MakeupPapers/web-1.vue";
 import MakeupPhotos from "./views/MakeupPhotos/index.vue";
 import MakeupPhotosUpload from "./views/MakeupPhotos/Upload.vue";
 import MakeupPhotosCertificate from "./views/MakeupPhotos/Certificate.vue";
@@ -34,6 +37,21 @@ const routes = [
   {
     path: "/makeupPapers",
     component: MakeupPapers,
+    meta: { title: "Makeup Papers" },
+  },
+  {
+    path: "/makeupPapers/web-1",
+    component: MakeupPapersWeb1,
+    meta: { title: "Makeup Papers" },
+  },
+  {
+    path: "/makeupPapers/combine",
+    component: MakeupPapersCombine,
+    meta: { title: "Makeup Papers" },
+  },
+  {
+    path: "/makeupPapers/MT-ResNet",
+    component: MakeupPapersMTResNet,
     meta: { title: "Makeup Papers" },
   },
   {
