@@ -20,10 +20,12 @@ import MakeupScoreAbsolute from "./views/MakeupScore/Absolute.vue";
 import MakeupScoreAbsoluteCertificate from "./views/MakeupScore/AbsoluteCertificate.vue";
 import Login from "./views/Login.vue";
 import Account from "./views/Account.vue";
+import Register from "./views/Register.vue";
 
 import NotFound from "./views/NotFound.vue";
 
 import auth from "./middleware/auth.js";
+import checkLogin from "./middleware/checkLogin.js";
 
 /** @type {import('vue-router').RouterOptions['routes']} */
 const routes = [
@@ -92,12 +94,17 @@ const routes = [
   {
     path: "/login",
     component: Login,
-    meta: { title: "Login" },
+    meta: { title: "Login", middleware: checkLogin },
   },
   {
     path: "/account",
     component: Account,
     meta: { title: "Account", middleware: auth },
+  },
+  {
+    path: "/register",
+    component: Register,
+    meta: { title: "Account" },
   },
   { path: "/:path(.*)", component: NotFound },
 ];

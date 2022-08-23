@@ -19,15 +19,15 @@ import SizeBox from "@/components/SizeBox.vue";
 const contents = [
   {
     name: "科普文章 網頁架構製作 ( 上 )",
-    url: "makeupPapers/web-1",
+    url: "/makeupPapers/web-1",
   },
   {
     name: "關於訓練模型與資料集",
-    url: "makeupPapers/MT-ResNet",
+    url: "/makeupPapers/MT-ResNet",
   },
   {
     name: "淺談美妝與科技的跨領域結合",
-    url: "makeupPapers/combine",
+    url: "/makeupPapers/combine",
   },
 ];
 </script>

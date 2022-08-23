@@ -22,12 +22,12 @@ const contents = [
   {
     image: "https://via.placeholder.com/300x200",
     title: "【大數據應用於建構彩妝審美基準之研究】",
-    url: "home/BigData",
+    url: "/home/BigData",
   },
   {
     image: "https://via.placeholder.com/300x200",
     title: "關於選擇的演算法",
-    url: "home/Algo",
+    url: "/home/Algo",
   },
 ];
 </script>
