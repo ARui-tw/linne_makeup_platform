@@ -6,7 +6,9 @@ import HomeAlgo from "./views/Home/Algo.vue";
 import HomeBigData from "./views/Home/BigData.vue";
 import About from "./views/About.vue";
 // import Awards from "./views/Awards.vue";
-import Expert from "./views/Expert.vue";
+import Expert from "./views/Expert/index.vue";
+import Expert_id from "./views/Expert/_id.vue";
+import ExpertRegister from "./views/Expert/register.vue";
 import MakeupPapers from "./views/MakeupPapers/index.vue";
 import MakeupPapersCombine from "./views/MakeupPapers/combine.vue";
 import MakeupPapersMTResNet from "./views/MakeupPapers/MT-ResNet.vue";
@@ -36,6 +38,8 @@ const routes = [
   { path: "/about", component: About, meta: { title: "About Us" } },
   // { path: "/awards", component: Awards, meta: { title: "Award" } },
   { path: "/expert", component: Expert, meta: { title: "Expert" } },
+  { path: "/expert/:_id", component: Expert_id, meta: { title: "Expert" } },
+  { path: "/expert/register", component: ExpertRegister, meta: { title: "Expert" } },
   {
     path: "/makeupPapers",
     component: MakeupPapers,
@@ -59,17 +63,17 @@ const routes = [
   {
     path: "/makeupPhotos",
     component: MakeupPhotos,
-    meta: { title: "Makeup Photos" },
+    meta: { title: "Makeup Photos", middleware: auth },
   },
   {
     path: "/makeupPhotos/upload",
     component: MakeupPhotosUpload,
-    meta: { title: "Makeup Photos Upload" },
+    meta: { title: "Makeup Photos Upload", middleware: auth },
   },
   {
     path: "/makeupPhotos/certificate",
     component: MakeupPhotosCertificate,
-    meta: { title: "Makeup Photos Certificate" },
+    meta: { title: "Makeup Photos Certificate", middleware: auth },
   },
   {
     path: "/makeupScore/relative",

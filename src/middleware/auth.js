@@ -1,7 +1,8 @@
-export default function auth({ next }) {
-  if (!$cookies.get("token")) {
-    return next("/login");
-  } else {
+export default async function auth({ next }) {
+  try {
+    await $api.user.getCurrentUser();
     return next();
+  } catch (error) {
+      return next("/login");
   }
 }

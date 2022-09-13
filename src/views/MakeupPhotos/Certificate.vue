@@ -39,6 +39,10 @@
       <router-link to="/" class="bg-gray-200 px-4 py-2 text-lg"
         >回首頁</router-link
       >
+      <SizeBox width="10" />
+      <div class="cursor-pointer bg-gray-200 px-4 py-2 text-lg" @click="">
+        送出
+      </div>
     </div>
   </div>
   <SizeBox height="30" />

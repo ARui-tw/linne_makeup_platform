@@ -26,7 +26,7 @@
         <div class="relative cursor-pointer" @click="calculateRank(item)">
           <div class="flex justify-center">
             <img
-              :src="getImageUrl(`img/fake_photo_data/${item.name}.jpg`)"
+              :src="`http://localhost:7001${item.url}`"
               :style="item.rank ? 'filter: opacity(70%)' : ''"
             />
           </div>
@@ -39,14 +39,14 @@
       </div>
       <div class="flex w-full flex-col items-end">
         <div
-          @click="getRandomSet"
+          @click="getRandomPhoto"
           class="w-32 cursor-pointer bg-gray-50 px-4 py-2 text-lg"
         >
           難以判斷
         </div>
         <SizeBox height="10" />
         <div
-          @click="getRandomSet"
+          @click="handleNextSet"
           class="w-32 cursor-pointer bg-gray-50 px-4 py-2 text-lg"
         >
           下一組
@@ -82,24 +82,24 @@ import { ref } from "vue";
 import bottleBG from "@/assets/img/bottle_bg.svg";
 import SizeBox from "@/components/SizeBox.vue";
 
-const randomIntFromInterval = (min, max) => {
-  // min and max included
-  return Math.floor(Math.random() * (max - min + 1) + min);
-};
-
-const getImageUrl = (name) => {
-  return new URL(`../../assets/${name}`, import.meta.url).href;
-};
-
 const cur_rank = ref(0);
 const set = ref([]);
-const getRandomSet = () => {
-  set.value = [];
-  for (let i = 0; i < 6; i++) {
-    set.value.push({ name: randomIntFromInterval(1, 24), rank: null });
+
+const getRandomPhoto = async () => {
+  cur_rank.value = 0;
+  try {
+    set.value = await $api.photo.getRandomPhoto({ size: 6 });
+  } catch (error) {
+    console.log(error);
   }
+  set.value = set.value.map((obj) => ({
+    _id: obj._id,
+    url: obj.url,
+    rank: null,
+  }));
 };
-getRandomSet();
+
+getRandomPhoto();
 
 const calculateRank = (item) => {
   if (item.rank === null) {
@@ -112,6 +112,30 @@ const calculateRank = (item) => {
     });
     item.rank = null;
     cur_rank.value--;
+  }
+};
+
+const handleNextSet = async () => {
+  if (cur_rank.value === 6) {
+    try {
+      const user_id = await $cookies.get("user_id");
+      const newRS = await $api.relativeScore.createRelativeScore({ user_id });
+      const { _id: RS_id } = newRS;
+
+      set.value.forEach(async (item) => {
+        await $api.photoRelativeScore.createPhotoRelativeScore({
+          relative_score_id: RS_id,
+          photo_id: item._id,
+          score: item.rank,
+        });
+      });
+    } catch (error) {
+      // console.log(error); // for debug
+    }
+
+    getRandomPhoto();
+  } else {
+    alert("請先完成評分");
   }
 };
 </script>

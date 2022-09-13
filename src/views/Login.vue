@@ -13,7 +13,7 @@
           class="border border-slate-300 bg-white py-2 pr-3 text-black shadow-sm placeholder:text-slate-400 focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
           placeholder="請輸入帳號"
           type="text"
-          name="Account"
+          v-model="name"
         />
       </div>
       <SizeBox height="20" />
@@ -24,7 +24,7 @@
           class="border border-slate-300 bg-white py-2 pr-3 text-black shadow-sm placeholder:text-slate-400 focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
           placeholder="請輸入密碼"
           type="password"
-          name="Password"
+          v-model="password"
         />
       </div>
       <SizeBox height="20" />
@@ -48,12 +48,37 @@
 </template>
 
 <script setup>
+import { ref } from "vue";
 import SizeBox from "@/components/SizeBox.vue";
 import { router } from "@/routes.js";
 
+const name = ref("");
+const password = ref("");
+
 const handleLogin = async () => {
-  await $cookies.set("token", "1234567890");
-  await $cookies.set("login", true);
-  router.push("/account");
+  // await $cookies.set("token", "1234567890");
+  // await $cookies.set("login", true);
+  try {
+    if (!name.value || !password.value) {
+      alert("帳號或密碼空白");
+      return;
+    }
+
+    const result = await $api.user.login({
+      name: name.value,
+      password: password.value,
+    });
+
+    if (result.token) {
+      await $cookies.set("token", result.token);
+      const currentUser = await $api.user.getCurrentUser();
+      await $cookies.set("user_id", currentUser._id);
+      router.push("/account");
+    } else {
+      alert("帳號或密碼錯誤");
+    }
+  } catch (e) {
+    alert("系統錯誤");
+  }
 };
 </script>

@@ -22,21 +22,33 @@
     <SizeBox height="30" />
     <div class="flex">
       <div>
-        <div class="bg-gray-200 py-1 pl-1" @click="upload()">
-          請上傳素顏照片
-        </div>
+        <div class="bg-gray-200 py-1 pl-1">請上傳素顏照片</div>
         <div class="my-3">素顏 Before</div>
-        <SizeBox width="300" height="400" class="bg-black" />
+        <div
+          style="width: 300px; height: 400px"
+          class="flex items-center justify-center bg-gray-300 align-middle"
+        >
+          <img v-if="url_before" :src="url_before" />
+        </div>
+        <SizeBox height="20" />
+        <input type="file" @change="onFileChange_before" style="width: 300px" />
       </div>
       <SizeBox width="50" />
       <div>
         <div class="bg-gray-200 py-1 pl-1">請上傳完妝照片</div>
         <div class="my-3">完妝 After</div>
-        <SizeBox width="300" height="400" class="bg-black" />
+        <div
+          style="width: 300px; height: 400px"
+          class="flex items-center justify-center bg-gray-300 align-middle"
+        >
+          <img v-if="url_after" :src="url_after" />
+        </div>
+        <SizeBox height="20" />
+        <input type="file" @change="onFileChange_after" style="width: 300px" />
       </div>
     </div>
-    <SizeBox height="20" />
-    <div class="flex">
+    <!-- <SizeBox height="20" /> -->
+    <!-- <div class="flex">
       <div class="my-auto mr-2">完妝照片目前評分</div>
       <input
         class="rounded-md border border-slate-300 bg-white py-2 pr-3 shadow-sm placeholder:italic placeholder:text-slate-400 focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
@@ -44,7 +56,7 @@
         type="text"
         name="score"
       />
-    </div>
+    </div> -->
     <SizeBox height="50" />
     <div class="text-xl">為您的完妝照片定義彩妝關鍵字</div>
     <SizeBox height="20" />
@@ -56,7 +68,12 @@
     <div class="flex">
       <div class="my-auto w-24 shrink-0">彩妝關鍵字</div>
       <div class="flex flex-wrap">
-        <div v-for="keyword in keywords" class="m-2 h-10 w-32 bg-gray-200">
+        <div
+          v-for="keyword in keywords"
+          @click="selected_keyword = keyword"
+          class="m-2 h-10 w-32 cursor-pointer"
+          :class="keyword == selected_keyword ? 'bg-gray-600' : 'bg-gray-200'"
+        >
           <div class="flex h-full w-full justify-center">
             <span class="my-auto">
               {{ keyword }}
@@ -81,7 +98,7 @@
         class="rounded-md border border-slate-300 bg-white py-2 pr-3 shadow-sm placeholder:italic placeholder:text-slate-400 focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
         placeholder="關鍵字"
         type="text"
-        name="keyword"
+        v-model="customize_keyword"
       />
     </div>
     <SizeBox height="20" />
@@ -94,11 +111,12 @@
     </div>
     <SizeBox height="30" />
     <div class="flex justify-end">
-      <router-link
-        to="/makeupPhotos/certificate"
-        class="bg-gray-200 px-4 py-2 text-lg"
-        >確認上傳</router-link
+      <div
+        class="cursor-pointer bg-gray-200 px-4 py-2 text-lg"
+        @click="handleUpload"
       >
+        確認上傳
+      </div>
     </div>
     <SizeBox height="30" />
   </div>
@@ -106,18 +124,81 @@
 
 <script setup>
 import SizeBox from "@/components/SizeBox.vue";
+import { router } from "@/routes";
+import { ref } from "vue";
+
+const url_before = ref();
+const url_after = ref();
+let file_before, file_after;
+const selected_keyword = ref("");
+const customize_keyword = ref("");
 
 const keywords = [
   "大舞台妝",
   "小舞台妝",
-  "日莊",
+  "日妝",
   "晚宴妝",
   "上班妝",
   "新娘妝",
   "宴會妝",
 ];
 
-const upload = () => {
-  console.assert("uploaded");
+// FIXME: must have a better way to do this
+const onFileChange_before = async (e) => {
+  file_before = e.target.files[0];
+  url_before.value = URL.createObjectURL(file_before);
+};
+
+const onFileChange_after = (e) => {
+  file_after = e.target.files[0];
+  url_after.value = URL.createObjectURL(file_after);
+};
+
+const upload_photo = async (
+  file,
+  photo_type,
+  keyword_id,
+  customize_keyword = ""
+) => {
+  console.log(keyword_id);
+  await $api.photo.createPhoto(file, {
+    fileName: file.name,
+    photo_type: photo_type,
+    keyword_id: keyword_id,
+    customize_keyword: customize_keyword,
+    "Content-Type": file.type,
+  });
+};
+
+const handleUpload = async () => {
+  if (!file_before || !file_after) {
+    alert("請上傳照片");
+    return;
+  }
+  if (!selected_keyword.value && !customize_keyword.value) {
+    alert("請選擇或自行定義關鍵字");
+    return;
+  }
+  if (selected_keyword.value && customize_keyword.value) {
+    alert("請選擇或自行定義關鍵字");
+    return;
+  }
+  try {
+    await upload_photo(
+      file_before,
+      "before",
+      encodeURIComponent(selected_keyword.value),
+      encodeURIComponent(customize_keyword.value)
+    );
+    await upload_photo(
+      file_after,
+      "after",
+      encodeURIComponent(selected_keyword.value),
+      encodeURIComponent(customize_keyword.value)
+    );
+    router.push("/makeupPhotos");
+  } catch (error) {
+    alert("上傳失敗");
+  }
 };
 </script>
