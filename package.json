@@ -7,12 +7,16 @@
     "serve": "vite preview --host"
   },
   "dependencies": {
+    "axios": "^0.27.2",
     "vue": "^3.2.37",
-    "vue-router": "^4.1.2"
+    "vue-axios": "^3.4.1",
+    "vue-cookies": "^1.8.1",
+    "vue-router": "^4.1.2",
+    "vuex": "^4.0.2"
   },
   "devDependencies": {
     "@headlessui/vue": "^1.6.7",
-    "@heroicons/vue": "^1.0.6",
+    "@heroicons/vue": "^2.0.11",
     "@tailwindcss/aspect-ratio": "^0.4.0",
     "@tailwindcss/forms": "^0.5.2",
     "@tailwindcss/line-clamp": "^0.4.0",
