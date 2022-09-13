@@ -85,13 +85,22 @@ const menuItems = ref([
     svgName: "photos",
   },
   {
-    name: "專業評分",
+    name: "絕對評分",
     englishName: "Makeup score",
-    path: "/makeupScore",
+    path: "/makeupScore/absolute",
     hover: false,
     explainText:
       "實驗成敗的關鍵來自每一個專注完美的眼光 <br /> 評鑑是一種反饋，表達從起初到未來的經驗 以及對美的沉思",
     svgName: "score",
+  },
+  {
+    name: "相對評分",
+    englishName: "Makeup score",
+    path: "/makeupScore/relative",
+    hover: false,
+    explainText:
+      "實驗成敗的關鍵來自每一個專注完美的眼光 <br /> 評鑑是一種反饋，表達從起初到未來的經驗 以及對美的沉思",
+    svgName: "expert",
   },
   {
     name: "夥伴團隊",
@@ -100,22 +109,18 @@ const menuItems = ref([
     hover: false,
     explainText:
       "懷抱自遠古以來 人類對美的嚮往 <br/> 探索各樣的可能性 開創一個新的美好",
-    svgName: "expert",
+    svgName: "papers",
   },
   {
     name: "彩妝論述",
     englishName: "Makeup Papers",
     path: "/makeupPapers",
+    // name: "特殊榮譽",
+    // englishName: "Awards",
+    // path: "/awards",
     hover: false,
     explainText: "以大數據做應用美學證據 探索未來彩妝",
-    svgName: "papers",
-  },
-  {
-    name: "特殊榮譽",
-    englishName: "Awards",
-    path: "/awards",
-    hover: false,
-    explainText: "忘記背後 努力向前 向著標竿直跑",
+    // explainText: "忘記背後 努力向前 向著標竿直跑",
     svgName: "awards",
   },
 ]);

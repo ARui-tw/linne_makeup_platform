@@ -7,13 +7,15 @@
         :width="breakpoints.md ? 350 : breakpoints.sm ? 250 : 200"
       />
     </router-link>
-    <div>
-      <img
-        src="@/assets/img/login_btn.svg"
-        alt="login_btn"
-        :width="breakpoints.md ? 200 : breakpoints.sm ? 150 : 100"
-      />
-    </div>
+    <router-link to="/login">
+      <div>
+        <img
+          src="@/assets/img/login_btn.svg"
+          alt="login_btn"
+          :width="breakpoints.md ? 200 : breakpoints.sm ? 150 : 100"
+        />
+      </div>
+    </router-link>
   </div>
 </template>
 

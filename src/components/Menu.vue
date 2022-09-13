@@ -57,9 +57,14 @@ const menuItems = [
     path: "/makeupPhotos",
   },
   {
-    name: "專業評分",
+    name: "絕對評分",
     englishName: "Makeup score",
-    path: "/makeupScore",
+    path: "/makeupScore/absolute",
+  },
+  {
+    name: "相對評分",
+    englishName: "Makeup score",
+    path: "/makeupScore/relative",
   },
   {
     name: "夥伴團隊",
@@ -71,10 +76,10 @@ const menuItems = [
     englishName: "Makeup Papers",
     path: "/makeupPapers",
   },
-  {
-    name: "特殊榮譽",
-    englishName: "Awards",
-    path: "/awards",
-  },
+  // {
+  //   name: "特殊榮譽",
+  //   englishName: "Awards",
+  //   path: "/awards",
+  // },
 ];
 </script>

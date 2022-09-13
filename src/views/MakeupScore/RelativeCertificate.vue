@@ -1,9 +1,9 @@
 <template>
   <div class="md:ml-20">
-    <div class="mt-20 text-xl">上傳彩妝作品 證書</div>
+    <div class="mt-20 text-xl">個人協助彩妝實驗 證書</div>
     <SizeBox height="30" />
     <div class="max-w-fit">
-      <img :src="getImageUrl(`img/upload_certificate.png`)" />
+      <img :src="getImageUrl(`img/tag_certificate.svg`)" />
       <SizeBox height="30" />
       <div class="bg-gray-100 p-5">
         <div v-for="field in fields" class="my-2">
@@ -39,10 +39,6 @@
       <router-link to="/" class="bg-gray-200 px-4 py-2 text-lg"
         >回首頁</router-link
       >
-      <SizeBox width="10" />
-      <div class="cursor-pointer bg-gray-200 px-4 py-2 text-lg" @click="">
-        送出
-      </div>
     </div>
   </div>
   <SizeBox height="30" />
