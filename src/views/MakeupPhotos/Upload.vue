@@ -185,10 +185,10 @@ const upload_photo = async (
   customize_keyword = ""
 ) => {
   await $api.photo.createPhoto(file, {
-    fileName: file.name,
+    fileName: encodeURIComponent(file.name),
     photo_type: photo_type,
     keyword_id: keyword_id,
-    customize_keyword: customize_keyword,
+    customize_keyword: encodeURIComponent(customize_keyword),
     "Content-Type": file.type,
   });
 };
