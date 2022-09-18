@@ -1,7 +1,10 @@
 <template>
   <div class="my-20 ml-4">
     <div class="text-2xl font-bold">{{ user.title }}</div>
-    {{ profession.description }}
+    <div class="whitespace-pre-wrap">
+      {{ profession.description }}
+    </div>
+
     <div v-for="image in artworks" class="my-4">
       <img :src="`${$baseURL}${image.artwork_url}`" />
     </div>
@@ -10,7 +13,6 @@
 </template>
 
 <script setup>
-import SizeBox from "@/components/SizeBox.vue";
 import { ref, onMounted } from "vue";
 import { router } from "@/routes";
 
