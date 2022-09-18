@@ -1,5 +1,5 @@
-export function createPhotoRelativeScore(api, data, headers) {
-  return api("POST", "/photoRelativeScore/createPhotoRelative", data, headers);
+export function createPhotoRelativeScore(api, data) {
+  return api("POST", "/photoRelativeScore/createPhotoRelative", data);
 }
 
 export function getPhotoRelativeScore(api, data) {

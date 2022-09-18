@@ -32,7 +32,7 @@
     </div>
     <SizeBox height="30" />
     <div class="justify-begin flex">
-      <router-link to="/" class="bg-gray-200 px-4 py-2 text-lg"
+      <router-link to="/account" class="bg-gray-200 px-4 py-2 text-lg"
         >個人帳號</router-link
       >
       <SizeBox width="10" />

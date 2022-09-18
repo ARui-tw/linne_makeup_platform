@@ -4,11 +4,12 @@
     <SizeBox height="10" />
     <div class="grid grid-cols-2 gap-2">
       <div
-        v-for="pro in proList"
+        v-for="(pro, key) in proList"
         class="flex flex-col items-center justify-center"
       >
         <router-link :to="`/expert/${pro._id}`">
-          <img :src="pro.image_url" />
+          <img :src="`${$baseURL}${imageList[key]}`" style="width: 300px" />
+          <div class="text-right">{{ userList[key] }}</div>
         </router-link>
       </div>
     </div>
@@ -25,16 +26,21 @@
 import { ref } from "vue";
 import SizeBox from "@/components/SizeBox.vue";
 const proList = ref([]);
-// const getProList = async () => {
-//   proList.value = await $api.profession.getProfessions({
-//     filter: { verified: true },
-//   });
-// };
-// getProList();
-proList.value = [
-  {
-    image_url: "https://i.imgur.com/yimaB3P.jpg",
-    _id: "60f1b1b0b9b1a20015f1b1b0",
-  },
-];
+const imageList = ref([]);
+const userList = ref([]);
+const getProList = async () => {
+  const result = await $api.profession.getProfessions({
+    filter: { verified: true },
+  });
+  Object.keys(result.data).forEach(async (key) => {
+    const image = await $api.artwork.getArtwork({
+      _id: result.data[key].imagePhotoId,
+    });
+    imageList.value.push(image.artwork_url);
+    const user = await $api.user.getUser({ _id: result.data[key].user_id });
+    userList.value.push(user.title);
+  });
+  proList.value = result.data;
+};
+getProList();
 </script>

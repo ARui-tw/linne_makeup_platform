@@ -5,7 +5,7 @@
       Discover new ideas/discourse
     </div>
     <SizeBox height="10" />
-    <div>
+    <div class="max-w-4xl">
       <router-link :to="content.url" v-for="content in contents">
         <div class="my-3 bg-gray-200">
           {{ content.name }}

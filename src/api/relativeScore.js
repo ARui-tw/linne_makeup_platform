@@ -1,5 +1,5 @@
-export function createRelativeScore(api, data, headers) {
-  return api("POST", "/relativeScore/createRelativeScore", data, headers);
+export function createRelativeScore(api, data) {
+  return api("POST", "/relativeScore/createRelativeScore", data);
 }
 
 export function getRelativeScore(api, data) {

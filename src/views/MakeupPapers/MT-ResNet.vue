@@ -2,7 +2,7 @@
   <div class="my-20 ml-4 mr-7">
     <div class="text-2xl font-bold">關於訓練模型與資料集</div>
     <SizeBox height="10" />
-    <div class="mr-5">
+    <div class="mr-5 max-w-4xl">
       [學習模型] MT-ResNet
       <br />
       <br />

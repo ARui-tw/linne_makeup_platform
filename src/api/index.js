@@ -5,6 +5,8 @@ import * as absoluteScore from "./absoluteScore.js";
 import * as photoRelativeScore from "./photoRelativeScore.js";
 import * as keywordPhoto from "./keywordPhoto.js";
 import * as profession from "./profession";
+import * as keyword from "./keyword.js";
+import * as artwork from "./artwork.js";
 
 const apis = {
   user,
@@ -13,7 +15,9 @@ const apis = {
   absoluteScore,
   photoRelativeScore,
   keywordPhoto,
-  profession
+  profession,
+  keyword,
+  artwork
 };
 
 const insertApi = (controller, api) => {
@@ -112,6 +116,13 @@ export default {
     app.$api = api;
     if (typeof window !== "undefined") {
       window.$api = api;
+    }
+
+    app.provide("baseUrl", baseURL);
+    app.config.globalProperties.$baseURL = baseURL;
+    app.$baseURL = baseURL;
+    if (typeof window !== "undefined") {
+      window.$baseURL = baseURL;
     }
   },
 };

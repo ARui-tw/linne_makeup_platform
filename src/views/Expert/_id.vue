@@ -1,8 +1,38 @@
 <template>
   <div class="my-20 ml-4">
-    <div class="text-2xl font-bold">嘉南藥理大學</div>
-    <div class="mt-3 mr-4">
-      嘉南藥理大學化粧品應用與管理系成立於1993年，為國內最早成立之化粧品專業科系，畢業生數千人，任職於化粧品各相關產業。本系目前有27位專任教師，專業領域涵蓋化粧品製造、化粧品評估（物性，安全性與有效性評估等）、化粧品原料開發、化粧品行銷、專業美容保養與彩粧等方面。本系積極進行國際學術交流：與泰國清邁大學及泰國蒙庫國王科技大學簽訂研究所碩士雙聯學位；與日本東京農業大學及新加坡理工學院均簽訂合作協議書；並與韓國昌信大學建立學生交流管道。
+    <div class="text-2xl font-bold">{{ user.title }}</div>
+    {{ profession.description }}
+    <div v-for="image in artworks" class="my-4">
+      <img :src="`${$baseURL}${image.artwork_url}`" />
     </div>
+    <div class="mt-3 mr-4 max-w-4xl"></div>
   </div>
 </template>
+
+<script setup>
+import SizeBox from "@/components/SizeBox.vue";
+import { ref, onMounted } from "vue";
+import { router } from "@/routes";
+
+const profession = ref({});
+const user = ref({});
+const artworks = ref([]);
+
+onMounted(async () => {
+  const result = await $api.profession.getProfession({
+    _id: router.currentRoute.value.params._id,
+  });
+  const user_result = await $api.user.getUser({
+    _id: result.user_id,
+  });
+  const artworks_result = await $api.artwork.getArtworks({
+    filter: { profession_id: result._id },
+  });
+
+  profession.value = result;
+  user.value = user_result;
+  artworks.value = artworks_result.data;
+});
+
+// getProfession();
+</script>

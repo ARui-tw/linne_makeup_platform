@@ -18,10 +18,15 @@
     <div class="flex flex-wrap" style="max-width: 520px">
       <div class="basis-1/2 p-3" v-for="item in set">
         <div class="flex flex-col justify-center">
-          <img
-            :src="`http://localhost:7001${item.url}`"
-            :style="item.rank ? 'filter: opacity(70%)' : ''"
-          />
+          <div
+            style="width: 225px; height: 300px"
+            class="flex items-center justify-center bg-gray-300 align-middle"
+          >
+            <img
+              :src="`${$baseURL}${item.url}`"
+              :style="item.rank ? 'filter: opacity(70%)' : ''"
+            />
+          </div>
           <SizeBox height="10" />
           <div class="flex">
             <div class="basis-1/4">給分</div>
@@ -60,7 +65,7 @@
   <SizeBox height="30" />
   <div class="flex justify-around">
     <router-link
-      to="/makeupScore/absolute/certificate"
+      to="/makeupScore/certificate"
       class="bg-gray-200 px-4 py-2 text-lg"
       >證書申請
     </router-link>

@@ -25,13 +25,18 @@
       <div class="basis-1/3 p-3" v-for="item in set">
         <div class="relative cursor-pointer" @click="calculateRank(item)">
           <div class="flex justify-center">
-            <img
-              :src="`http://localhost:7001${item.url}`"
-              :style="item.rank ? 'filter: opacity(70%)' : ''"
-            />
+            <div
+              style="width: 135px; height: 180px"
+              class="flex items-center justify-center bg-gray-300 align-middle"
+            >
+              <img
+                :src="`${$baseURL}${item.url}`"
+                :style="item.rank ? 'filter: opacity(60%)' : ''"
+              />
+            </div>
           </div>
           <div
-            class="absolute left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2 text-center text-xl text-white"
+            class="absolute left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2 text-center text-3xl font-bold text-white"
           >
             {{ item.rank }}
           </div>
@@ -57,7 +62,7 @@
   <SizeBox height="30" />
   <div class="flex justify-around">
     <router-link
-      to="/makeupScore/relative/certificate"
+      to="/makeupScore/certificate"
       class="bg-gray-200 px-4 py-2 text-lg"
       >證書申請
     </router-link>
