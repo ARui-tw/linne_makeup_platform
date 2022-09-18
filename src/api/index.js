@@ -40,7 +40,7 @@ export default {
     // TODO: change this to your api url
     const baseURL = import.meta.env.DEV
       ? "http://localhost:7001"
-      : "http://localhost:7001";
+      : "https://ctf-temp.arui.dev";
 
     const service = axios.create({
       baseURL: baseURL,
