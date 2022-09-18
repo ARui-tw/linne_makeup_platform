@@ -1,6 +1,29 @@
 <template>
   <div class="m-20 text-3xl">實驗研究同意書（臉部實驗免責同意書）</div>
-  <div class="max-w-4xl bg-gray-100 p-10 md:ml-20">
+
+  <div class="md:ml-20">
+    <!-- <iframe
+      :src="getFileUrl('pdf/agreement.pdf')"
+      width="1000"
+      height="750"
+      type="application/pdf"
+    /> -->
+    <object
+      data="mypdf.pdf"
+      type="application/pdf"
+      frameborder="0"
+      width="100%"
+      height="750"
+      style="padding: 20px"
+    >
+      <embed
+        src="https://drive.google.com/file/d/1axVvYYn-cWNlojLNMUlTW8PvtLwneXNE/preview?usp=sharing"
+        width="100%"
+        height="600px"
+      />
+    </object>
+  </div>
+  <!-- <div class="max-w-4xl bg-gray-100 p-10 md:ml-20">
     <div class="text-2xl">蒐集個人資料告知事項暨個人資料提供同意書</div>
     <br />
     <br />
@@ -59,22 +82,25 @@
         本人同意貴處使用本人之個人資料所創造出的作品所有權屬於AI彩妝實驗室及其產學合作對象。
       </li>
     </ol>
-    <SizeBox height="30" />
-    <div class="flex justify-end">
-      <router-link
-        to="/makeupPhotos/upload"
-        class="bg-gray-50 px-4 py-2 text-lg"
-        >同意</router-link
-      >
-      <SizeBox width="10" />
-      <router-link to="/" class="bg-gray-50 px-4 py-2 text-lg"
-        >不同意/回首頁</router-link
-      >
-    </div>
+    <SizeBox height="30" /> -->
+
+  <div class="flex justify-end">
+    <router-link to="/makeupPhotos/upload" class="bg-gray-50 px-4 py-2 text-lg"
+      >同意</router-link
+    >
+    <SizeBox width="10" />
+    <router-link to="/" class="bg-gray-50 px-4 py-2 text-lg"
+      >不同意/回首頁</router-link
+    >
   </div>
+  <!-- </div> -->
   <SizeBox height="30" />
 </template>
 
 <script setup>
 import SizeBox from "@/components/SizeBox.vue";
+
+const getFileUrl = (name) => {
+  return new URL(`../../assets/${name}`, import.meta.url).href;
+};
 </script>

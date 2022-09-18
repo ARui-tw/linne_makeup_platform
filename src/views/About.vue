@@ -1,5 +1,5 @@
 <template>
-  <div class="my-20 ml-4 mr-7">
+  <div class="my-20 ml-4 mr-7 max-w-4xl">
     <div class="text-2xl font-bold">計畫主持人 翁詠祿教授</div>
     <SizeBox height="10" />
     <div>

@@ -2,7 +2,7 @@
   <div class="my-20 ml-4 mr-7">
     <div class="text-2xl font-bold">淺談美妝與科技的跨領域結合</div>
     <SizeBox height="10" />
-    <div class="mr-5">
+    <div class="mr-5 max-w-4xl">
       在強調跨領域多元融合的如今，深度學習及AI技術逐漸成熟，並開始被廣泛運用在不同的應用以及產業上，為未來科技帶來更多發展的可能性，可謂是又造成了一波新時代的科學數據革命。
       <br />
       <br />

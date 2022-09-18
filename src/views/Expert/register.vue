@@ -60,7 +60,7 @@
         <SizeBox height="10" />
         <div class="flex items-center justify-between">
           <div>
-            照片上傳說明:<br />
+            封面照片上傳說明<br />
             <div class="text-sm">可用JPG或PNG檔.5MG以下 直式照片</div>
           </div>
           <SizeBox width="10" />
@@ -81,12 +81,10 @@
             </div>
           </div>
           <SizeBox width="10" />
-          <input
-            type="file"
-            @change="onFileChange_before"
-            style="width: 300px"
-          />
         </div>
+        <textarea
+          class="my-3 block w-full rounded border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-1.5 text-base font-normal transition ease-in-out focus:border-blue-600 focus:bg-white focus:outline-none"
+        ></textarea>
 
         <div class="flex justify-end">
           <div
@@ -103,9 +101,11 @@
       <div class="mb-2 text-lg">如何成為夥伴關係說明</div>
       <ol class="list-inside list-cjk">
         <li>可以以個人學校 公司或法人註冊一個帳號</li>
-        <li>上傳個人計畫主持人或負責人之乙級證照或參展作品及書寫研究專業即可註冊</li>
+        <li>
+          上傳個人計畫主持人或負責人之乙級證照或參展作品及書寫研究專業即可註冊
+        </li>
         <li>每一個帳號 只能發一張專業級協助實驗證書</li>
-        <li>每一專業 帳號註冊需繳交費用3000元</li>
+        <!-- <li>每一專業 帳號註冊需繳交費用3000元</li> -->
         <li>專業帳號 將獲得該單位 專屬單頁 網頁並能上傳照片</li>
         <li>專業帳號才能去評選相關評鑑 協助校正訊息</li>
       </ol>
@@ -117,12 +117,12 @@
 import SizeBox from "@/components/SizeBox.vue";
 
 const fields = [
+  // {
+  //   label: "夥伴團隊註冊",
+  //   name: "register",
+  // },
   {
-    label: "夥伴團隊註冊",
-    name: "register",
-  },
-  {
-    label: "負責人/個人",
+    label: "團隊名稱",
     name: "Name",
   },
   {

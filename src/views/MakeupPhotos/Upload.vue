@@ -16,7 +16,11 @@
       訓練機器變聰明喔！<br />
       <br />
       照片請用JPG或PNG檔 5MB 以下直式照片
-      <a href="https://www.google.com" class="underline">詳細格式說明</a
+      <a
+        :href="getFileUrl('pdf/image_format.pdf')"
+        target="_blank"
+        class="underline"
+        >詳細格式說明</a
       >（點此下載照片格式說明.pdf）
     </div>
     <SizeBox height="30" />
@@ -69,15 +73,17 @@
       <div class="my-auto w-24 shrink-0">彩妝關鍵字</div>
       <div class="flex flex-wrap">
         <div
-          v-for="keyword in keywords"
-          @click="selected_keyword = keyword"
+          v-for="(keyword, key) in keywords"
+          @click="
+            selected_keyword == key
+              ? (selected_keyword = -1)
+              : (selected_keyword = key)
+          "
           class="m-2 h-10 w-32 cursor-pointer"
-          :class="keyword == selected_keyword ? 'bg-gray-600' : 'bg-gray-200'"
+          :class="key == selected_keyword ? 'bg-gray-600' : 'bg-gray-200'"
         >
           <div class="flex h-full w-full justify-center">
-            <span class="my-auto">
-              {{ keyword }}
-            </span>
+            <span class="my-auto"> {{ keyword.name }} </span>
           </div>
         </div>
       </div>
@@ -86,10 +92,12 @@
     <div class="text-xl">完妝關鍵字的範例照片</div>
     <SizeBox height="20" />
     <div class="flex">
-      <SizeBox width="150" height="200" class="mx-3 bg-black" />
-      <SizeBox width="150" height="200" class="mx-3 bg-black" />
-      <SizeBox width="150" height="200" class="mx-3 bg-black" />
-      <SizeBox width="150" height="200" class="mx-3 bg-black" />
+      <div
+        class="grid max-w-md"
+        v-for="keywordPhoto in keywordPhotos[selected_keyword]"
+      >
+        <img :src="`${$baseURL}${keywordPhoto.url}`" />
+      </div>
     </div>
     <SizeBox height="20" />
     <div class="flex">
@@ -121,7 +129,6 @@
     <SizeBox height="30" />
   </div>
 </template>
-
 <script setup>
 import SizeBox from "@/components/SizeBox.vue";
 import { router } from "@/routes";
@@ -130,18 +137,35 @@ import { ref } from "vue";
 const url_before = ref();
 const url_after = ref();
 let file_before, file_after;
-const selected_keyword = ref("");
+const selected_keyword = ref(-1);
 const customize_keyword = ref("");
+const keywords = ref([]);
+const keywordPhotos = ref([]);
 
-const keywords = [
-  "大舞台妝",
-  "小舞台妝",
-  "日妝",
-  "晚宴妝",
-  "上班妝",
-  "新娘妝",
-  "宴會妝",
-];
+const getKeywords = async () => {
+  const result = await $api.keyword.getKeywords();
+  keywords.value = result.data;
+};
+
+const getKeywordPhoto = async () => {
+  keywords.value.forEach(async (keyword, index) => {
+    const result = await $api.keywordPhoto.getKeywordPhotos({
+      filter: { keyword_id: keyword._id },
+    });
+    keywordPhotos.value[index] = result.data;
+  });
+};
+
+const getData = async () => {
+  await getKeywords();
+  await getKeywordPhoto();
+};
+
+getData();
+
+const getFileUrl = (name) => {
+  return new URL(`../../assets/${name}`, import.meta.url).href;
+};
 
 // FIXME: must have a better way to do this
 const onFileChange_before = async (e) => {
@@ -160,7 +184,6 @@ const upload_photo = async (
   keyword_id,
   customize_keyword = ""
 ) => {
-  console.log(keyword_id);
   await $api.photo.createPhoto(file, {
     fileName: file.name,
     photo_type: photo_type,
@@ -175,30 +198,37 @@ const handleUpload = async () => {
     alert("請上傳照片");
     return;
   }
-  if (!selected_keyword.value && !customize_keyword.value) {
+  if (selected_keyword.value === -1 && !customize_keyword.value) {
     alert("請選擇或自行定義關鍵字");
     return;
   }
-  if (selected_keyword.value && customize_keyword.value) {
+  if (selected_keyword.value !== -1 && customize_keyword.value) {
     alert("請選擇或自行定義關鍵字");
     return;
   }
   try {
+    let keyword_id;
+    if (selected_keyword.value === -1) {
+      keyword_id = null;
+    } else {
+      keyword_id = keywords.value[selected_keyword.value].id;
+    }
     await upload_photo(
       file_before,
       "before",
-      encodeURIComponent(selected_keyword.value),
+      keyword_id,
       encodeURIComponent(customize_keyword.value)
     );
     await upload_photo(
       file_after,
       "after",
-      encodeURIComponent(selected_keyword.value),
+      keyword_id,
       encodeURIComponent(customize_keyword.value)
     );
     router.push("/makeupPhotos");
   } catch (error) {
     alert("上傳失敗");
+    console.log(error);
   }
 };
 </script>

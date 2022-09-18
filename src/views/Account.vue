@@ -15,15 +15,16 @@
                 type="text"
                 :name="field.name"
                 v-model="userData[field.col]"
-                disabled
               />
             </div>
           </div>
-          <div
-            class="flex w-full flex-row justify-between text-black"
-            @click="handleLogout"
-          >
-            <div class="cursor-pointer bg-gray-50 px-2 py-1 text-sm">登出</div>
+          <div class="flex w-full flex-row justify-between text-black">
+            <div
+              @click="handleLogout"
+              class="cursor-pointer bg-gray-50 px-2 py-1 text-sm"
+            >
+              登出
+            </div>
           </div>
         </div>
       </div>
@@ -32,10 +33,7 @@
         <div class="text-lg font-bold">個人相簿區/可提供化妝歷程回顧</div>
         <div class="grid grid-cols-3 gap-2">
           <div v-for="photo in photos" class="my-1">
-            <img
-              :src="`http://localhost:7001${photo.url}`"
-              style="width: 100px"
-            />
+            <img :src="`${$baseURL}${photo.url}`" style="width: 100px" />
           </div>
         </div>
         <SizeBox height="10" />

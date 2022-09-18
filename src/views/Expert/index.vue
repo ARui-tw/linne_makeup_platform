@@ -8,7 +8,8 @@
         class="flex flex-col items-center justify-center"
       >
         <router-link :to="`/expert/${pro._id}`">
-          <img :src="pro.image_url" />
+          <img :src="pro.image_url" style="width: 300px" />
+          <div class="text-right">{{ pro.name }}</div>
         </router-link>
       </div>
     </div>
@@ -35,6 +36,7 @@ proList.value = [
   {
     image_url: "https://i.imgur.com/yimaB3P.jpg",
     _id: "60f1b1b0b9b1a20015f1b1b0",
+    name: "蘇慧倫",
   },
 ];
 </script>
