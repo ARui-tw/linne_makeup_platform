@@ -3,6 +3,6 @@ export default async function auth({ next }) {
     await $api.user.getCurrentUser();
     return next("/account");
   } catch (error) {
-      return next();
+    return next();
   }
 }

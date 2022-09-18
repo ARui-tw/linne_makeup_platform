@@ -86,20 +86,19 @@ const menuItems = ref([
   },
   {
     name: "絕對評分",
-    englishName: "Makeup score",
+    englishName: "Absolute score",
     path: "/makeupScore/absolute",
     hover: false,
-    explainText:
-      "實驗成敗的關鍵來自每一個專注完美的眼光 <br /> 評鑑是一種反饋，表達從起初到未來的經驗 以及對美的沉思",
+    explainText: "請在美麗與個性之間 做出一個判決吧~",
     svgName: "score",
   },
   {
     name: "相對評分",
-    englishName: "Makeup score",
+    englishName: "Relative score",
     path: "/makeupScore/relative",
     hover: false,
     explainText:
-      "實驗成敗的關鍵來自每一個專注完美的眼光 <br /> 評鑑是一種反饋，表達從起初到未來的經驗 以及對美的沉思",
+      "無與倫比的美感經驗，有著無限多的可能性<br />那麼排列與選擇就是個人品味的尺",
     svgName: "expert",
   },
   {

@@ -77,7 +77,7 @@
     </ol>
     <SizeBox height="30" /> -->
 
-  <div class="flex justify-end">
+  <div class="flex justify-center">
     <router-link to="/makeupPhotos/upload" class="bg-gray-50 px-4 py-2 text-lg"
       >同意</router-link
     >

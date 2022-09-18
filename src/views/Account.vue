@@ -1,7 +1,7 @@
 <template>
   <div class="my-32 mx-auto flex items-center justify-center">
     <div
-      class="flex flex-col-reverse bg-black-300 py-20 px-32 text-white md:flex-row"
+      class="flex flex-col-reverse bg-black-300 py-10 px-16 text-white md:flex-row lg:py-20 lg:px-32"
     >
       <div>
         <div class="flex justify-between">
@@ -57,9 +57,14 @@
       <SizeBox width="50" height="30" />
       <div>
         <div class="text-lg font-bold">個人相簿區/可提供化妝歷程回顧</div>
-        <div class="grid grid-cols-3 gap-2">
+        <div class="grid grid-cols-2 gap-1 lg:grid-cols-3 lg:gap-2">
           <div v-for="photo in photos" class="my-1">
-            <img :src="`${$baseURL}${photo.url}`" style="width: 100px" />
+            <div
+              style="width: 100px; height: 135px"
+              class="flex items-center justify-center bg-gray-300 align-middle"
+            >
+              <img :src="`${$baseURL}${photo.url}`" style="width: 100px" />
+            </div>
           </div>
         </div>
         <SizeBox height="10" />
@@ -164,7 +169,14 @@ const handleEditEnable = async () => {
 };
 
 const handleEdit = async () => {
-  await $api.user.modifyUser(userData.value);
+  const modifyData = {
+    name: userData.value.name,
+    phone: userData.value.phone,
+    email: userData.value.email,
+    post_address: userData.value.post_address,
+    title: userData.value.title,
+  };
+  await $api.user.modifyCurrentUser(modifyData);
   await getUserData();
   editEnable.value = false;
 };

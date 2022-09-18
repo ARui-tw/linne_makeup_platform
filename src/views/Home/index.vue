@@ -2,7 +2,7 @@
   <div class="my-20 ml-4">
     <div class="text-2xl font-bold">本月之星：實驗室最新情報</div>
     <SizeBox height="10" />
-    <div class="grid grid-cols-2 gap-2">
+    <div class="grid grid-cols-1 gap-2 md:grid-cols-2">
       <div
         v-for="content in contents"
         class="flex flex-col items-center justify-center"

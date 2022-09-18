@@ -1,7 +1,7 @@
 <template>
   <div
     :style="{ backgroundImage: `url(${bottleBG})` }"
-    class="ml-20 bg-repeat-y p-14"
+    class="ml-5 bg-repeat-y p-14 md:ml-20"
   >
     <div class="text-2xl">
       相對分數 <br />
@@ -60,22 +60,22 @@
     </div>
   </div>
   <SizeBox height="30" />
-  <div class="flex justify-around">
+  <div class="ml-5 flex justify-around md:ml-20" style="max-width: 520px">
     <router-link
       to="/makeupScore/certificate"
-      class="bg-gray-200 px-4 py-2 text-lg"
+      class="min-w-fit bg-gray-200 px-4 py-2 text-lg"
       >證書申請
     </router-link>
 
     <SizeBox width="10" />
 
-    <router-link to="/account" class="bg-gray-200 px-4 py-2 text-lg"
+    <router-link to="/account" class="min-w-fit bg-gray-200 px-4 py-2 text-lg"
       >個人帳號</router-link
     >
 
     <SizeBox width="10" />
 
-    <router-link to="/" class="bg-gray-200 px-4 py-2 text-lg"
+    <router-link to="/" class="min-w-fit bg-gray-200 px-4 py-2 text-lg"
       >回首頁</router-link
     >
   </div>

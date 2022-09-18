@@ -24,9 +24,9 @@
       >（點此下載照片格式說明.pdf）
     </div>
     <SizeBox height="30" />
-    <div class="flex">
+    <div class="flex flex-col md:flex-row">
       <div>
-        <div class="bg-gray-200 py-1 pl-1">請上傳素顏照片</div>
+        <div class="max-w-fit bg-gray-200 py-1 pl-1">請上傳素顏照片</div>
         <div class="my-3">素顏 Before</div>
         <div
           style="width: 300px; height: 400px"
@@ -39,7 +39,7 @@
       </div>
       <SizeBox width="50" />
       <div>
-        <div class="bg-gray-200 py-1 pl-1">請上傳完妝照片</div>
+        <div class="max-w-fit bg-gray-200 py-1 pl-1">請上傳完妝照片</div>
         <div class="my-3">完妝 After</div>
         <div
           style="width: 300px; height: 400px"
@@ -93,10 +93,15 @@
     <SizeBox height="20" />
     <div class="flex">
       <div
-        class="grid max-w-md"
+        class="mr-2 grid w-36"
         v-for="keywordPhoto in keywordPhotos[selected_keyword]"
       >
-        <img :src="`${$baseURL}${keywordPhoto.url}`" />
+        <div
+          style="width: 144px; height: 144px"
+          class="flex items-center justify-center bg-gray-300 align-middle"
+        >
+          <img :src="`${$baseURL}${keywordPhoto.url}`" />
+        </div>
       </div>
     </div>
     <SizeBox height="20" />
@@ -118,7 +123,7 @@
       同一位模特兒可採用照片 上限為20組彩妝<br />
     </div>
     <SizeBox height="30" />
-    <div class="flex justify-end">
+    <div class="flex justify-center">
       <div
         class="cursor-pointer bg-gray-200 px-4 py-2 text-lg"
         @click="handleUpload"
@@ -129,6 +134,7 @@
     <SizeBox height="30" />
   </div>
 </template>
+
 <script setup>
 import SizeBox from "@/components/SizeBox.vue";
 import { router } from "@/routes";
@@ -211,7 +217,7 @@ const handleUpload = async () => {
     if (selected_keyword.value === -1) {
       keyword_id = null;
     } else {
-      keyword_id = keywords.value[selected_keyword.value].id;
+      keyword_id = keywords.value[selected_keyword.value]._id;
     }
     await upload_photo(
       file_before,
@@ -225,6 +231,7 @@ const handleUpload = async () => {
       keyword_id,
       encodeURIComponent(customize_keyword.value)
     );
+    alert("success");
     router.push("/makeupPhotos");
   } catch (error) {
     alert("上傳失敗");

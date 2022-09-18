@@ -58,12 +58,12 @@ const menuItems = [
   },
   {
     name: "絕對評分",
-    englishName: "Makeup score",
+    englishName: "Absolute score",
     path: "/makeupScore/absolute",
   },
   {
     name: "相對評分",
-    englishName: "Makeup score",
+    englishName: "Relative score",
     path: "/makeupScore/relative",
   },
   {

@@ -1,7 +1,7 @@
 <template>
   <div
     :style="{ backgroundImage: `url(${absolute_bg})` }"
-    class="ml-20 bg-repeat-y p-14"
+    class="ml-5 bg-repeat-y p-14 md:ml-20"
   >
     <div class="text-2xl">
       絕對分數 <br />
@@ -63,7 +63,7 @@
     </div>
   </div>
   <SizeBox height="30" />
-  <div class="flex justify-around">
+  <div class="ml-5 flex justify-around md:ml-20" style="max-width: 520px">
     <router-link
       to="/makeupScore/certificate"
       class="bg-gray-200 px-4 py-2 text-lg"
@@ -95,7 +95,7 @@ const options = ["0", "1", "2", "3", "4", "5", "無法判斷"];
 const set = ref([]);
 const getRandomPhoto = async () => {
   try {
-    set.value = await $api.photo.getRandomPhoto({ size: 6 });
+    set.value = await $api.photo.getRandomPhoto({ size: 4 });
   } catch (error) {
     console.log(error);
   }
