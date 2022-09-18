@@ -14,6 +14,7 @@
               class="w-full rounded-md border border-slate-300 bg-white py-2 pr-3 shadow-sm placeholder:italic placeholder:text-slate-400 focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
               type="text"
               :name="field.name"
+              v-model="UserData[field.col]"
             />
           </div>
         </div>
@@ -33,7 +34,7 @@
           <SizeBox width="10" />
           <input
             type="file"
-            @change="onFileChange_before"
+            @change="onFileChange_certificate"
             style="width: 300px"
           />
         </div>
@@ -47,13 +48,15 @@
               上傳至本實驗室的作品<br />
               將公開展示為彩妝展示平台<br />
               內容將會呈現在介紹夥伴的頁面<br />
+              可多選<br />
             </div>
           </div>
           <SizeBox width="10" />
           <input
             type="file"
-            @change="onFileChange_before"
+            @change="onFileChange_artwork"
             style="width: 300px"
+            multiple="multiple"
           />
         </div>
 
@@ -66,7 +69,7 @@
           <SizeBox width="10" />
           <input
             type="file"
-            @change="onFileChange_before"
+            @change="onFileChange_image"
             style="width: 300px"
           />
         </div>
@@ -84,12 +87,13 @@
         </div>
         <textarea
           class="my-3 block w-full rounded border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-1.5 text-base font-normal transition ease-in-out focus:border-blue-600 focus:bg-white focus:outline-none"
+          v-model="UserData.description"
         ></textarea>
 
         <div class="flex justify-end">
           <div
             class="cursor-pointer bg-gray-200 px-4 py-2 text-lg"
-            @click="handleUpload"
+            @click="handleCreateProfession"
           >
             註冊
           </div>
@@ -115,23 +119,92 @@
 
 <script setup>
 import SizeBox from "@/components/SizeBox.vue";
+import { router } from "@/routes";
+import { ref } from "vue";
+
+const artworks = ref({});
+const imagePhoto = ref({});
+const certificate = ref({});
+const UserData = ref({
+  title: "",
+  name: "",
+  email: "",
+  phone: "",
+  description: "",
+});
 
 const fields = [
-  // {
-  //   label: "夥伴團隊註冊",
-  //   name: "register",
-  // },
   {
     label: "團隊名稱",
+    name: "Title",
+    col: "title",
+  },
+  {
+    label: "負責人",
     name: "Name",
+    col: "name",
   },
   {
     label: "連絡電話",
     name: "Tel.",
+    col: "phone",
   },
   {
     label: "電郵",
     name: "E-Mail",
+    col: "email",
   },
 ];
+
+const onFileChange_artwork = (e) => {
+  artworks.value = e.target.files;
+};
+
+const onFileChange_certificate = (e) => {
+  certificate.value = e.target.files[0];
+};
+
+const onFileChange_image = (e) => {
+  imagePhoto.value = e.target.files[0];
+};
+
+const upload_image = async (file, profession_id) => {
+  const result = await $api.artwork.createArtwork(file, {
+    fileName: file.name,
+    profession_id,
+    "Content-Type": file.type,
+  });
+  return result;
+};
+
+const handleCreateProfession = async () => {
+  console.log(certificate.value);
+  const professionResult = await $api.profession.createProfession(
+    certificate.value,
+    {
+      title: UserData.value.title,
+      name: UserData.value.name,
+      email: UserData.value.email,
+      phone: UserData.value.phone,
+      description: UserData.value.description,
+      fileName: certificate.value.name,
+      "Content-Type": certificate.value.type,
+    }
+  );
+
+  const imageResult = await upload_image(
+    imagePhoto.value,
+    professionResult._id
+  );
+
+  const professionModifyResult = await $api.profession.modifyProfession({
+    _id: professionResult._id,
+    imagePhotoId: imageResult._id,
+  });
+
+  Object.keys(artworks.value).forEach(async (key) => {
+    await upload_image(artworks.value[key], professionResult._id);
+  });
+  router.push("/expert");
+};
 </script>

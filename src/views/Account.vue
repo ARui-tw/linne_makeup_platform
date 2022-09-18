@@ -1,8 +1,20 @@
 <template>
   <div class="my-32 mx-auto flex items-center justify-center">
-    <div class="flex bg-black-300 py-20 px-32 text-white">
+    <div
+      class="flex flex-col-reverse bg-black-300 py-20 px-32 text-white md:flex-row"
+    >
       <div>
-        <div class="text-lg font-bold">個人帳號</div>
+        <div class="flex justify-between">
+          <div class="min-w-fit text-lg font-bold">個人帳號</div>
+          <div class="flex min-w-fit flex-row justify-between text-black">
+            <div
+              @click="handleEditEnable"
+              class="cursor-pointer bg-gray-50 px-2 py-1 text-sm"
+            >
+              {{ editEnable ? "取消修改" : "修改資料" }}
+            </div>
+          </div>
+        </div>
         <div>
           <div v-for="field in fields" class="my-2">
             <div class="flex">
@@ -15,20 +27,34 @@
                 type="text"
                 :name="field.name"
                 v-model="userData[field.col]"
+                :disabled="!editEnable"
               />
             </div>
           </div>
-          <div class="flex w-full flex-row justify-between text-black">
+          <div class="flex justify-between">
+            <div class="flex min-w-fit flex-row justify-between text-black">
+              <div
+                @click="handleLogout"
+                class="cursor-pointer bg-gray-50 px-2 py-1 text-sm"
+              >
+                登出
+              </div>
+            </div>
             <div
-              @click="handleLogout"
-              class="cursor-pointer bg-gray-50 px-2 py-1 text-sm"
+              v-show="editEnable"
+              class="flex min-w-fit flex-row justify-between text-black"
             >
-              登出
+              <div
+                @click="handleEdit"
+                class="cursor-pointer bg-gray-50 px-2 py-1 text-sm"
+              >
+                送出
+              </div>
             </div>
           </div>
         </div>
       </div>
-      <SizeBox width="50" />
+      <SizeBox width="50" height="30" />
       <div>
         <div class="text-lg font-bold">個人相簿區/可提供化妝歷程回顧</div>
         <div class="grid grid-cols-3 gap-2">
@@ -37,17 +63,23 @@
           </div>
         </div>
         <SizeBox height="10" />
-        <div>
-          <div
-            class="flex w-full flex-row justify-between text-black"
-            @click="handleNext"
-          >
+        <div class="flex justify-between">
+          <div class="flex w-full text-black">
             <div
+              @click="handleNext"
               v-show="totalPhotos > offset + 12"
               class="cursor-pointer bg-gray-50 px-2 py-1 text-sm"
             >
               下一頁
             </div>
+          </div>
+          <div class="flex min-w-fit text-black">
+            <router-link
+              class="cursor-pointer bg-gray-50 px-2 py-1 text-sm"
+              to="/MakeupPhotos/Certificate"
+            >
+              申請證書
+            </router-link>
           </div>
         </div>
       </div>
@@ -92,6 +124,7 @@ const userData = ref([]);
 const photos = ref([]);
 const totalPhotos = ref(0);
 const offset = ref(0);
+const editEnable = ref(false);
 
 const getUserData = async () => {
   userData.value = await $api.user.getCurrentUser();
@@ -121,6 +154,19 @@ const handleNext = async () => {
     skip: offset.value,
   });
   photos.value = photos_result.data;
+};
+
+const handleEditEnable = async () => {
+  if (editEnable.value) {
+    await getUserData();
+  }
+  editEnable.value = !editEnable.value;
+};
+
+const handleEdit = async () => {
+  await $api.user.modifyUser(userData.value);
+  await getUserData();
+  editEnable.value = false;
 };
 
 const handleLogout = async () => {

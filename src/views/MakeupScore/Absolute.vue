@@ -65,7 +65,7 @@
   <SizeBox height="30" />
   <div class="flex justify-around">
     <router-link
-      to="/makeupScore/absolute/certificate"
+      to="/makeupScore/certificate"
       class="bg-gray-200 px-4 py-2 text-lg"
       >證書申請
     </router-link>

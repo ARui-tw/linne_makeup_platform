@@ -17,9 +17,9 @@ import MakeupPhotos from "./views/MakeupPhotos/index.vue";
 import MakeupPhotosUpload from "./views/MakeupPhotos/Upload.vue";
 import MakeupPhotosCertificate from "./views/MakeupPhotos/Certificate.vue";
 import MakeupScoreRelative from "./views/MakeupScore/Relative.vue";
-import MakeupScoreRelativeCertificate from "./views/MakeupScore/RelativeCertificate.vue";
+// import MakeupScoreRelativeCertificate from "./views/MakeupScore/RelativeCertificate.vue";
 import MakeupScoreAbsolute from "./views/MakeupScore/Absolute.vue";
-import MakeupScoreAbsoluteCertificate from "./views/MakeupScore/AbsoluteCertificate.vue";
+import MakeupScoreCertificate from "./views/MakeupScore/Certificate.vue";
 import Login from "./views/Login.vue";
 import Account from "./views/Account.vue";
 import Register from "./views/Register.vue";
@@ -80,19 +80,19 @@ const routes = [
     component: MakeupScoreRelative,
     meta: { title: "Makeup Score Relative", middleware: auth },
   },
-  {
-    path: "/makeupScore/relative/certificate",
-    component: MakeupScoreRelativeCertificate,
-    meta: { title: "Makeup Score Relative", middleware: auth },
-  },
+  // {
+  //   path: "/makeupScore/certificate",
+  //   component: MakeupScoreRelativeCertificate,
+  //   meta: { title: "Makeup Score Relative", middleware: auth },
+  // },
   {
     path: "/makeupScore/absolute",
     component: MakeupScoreAbsolute,
     meta: { title: "Makeup Score Absolute", middleware: auth },
   },
   {
-    path: "/makeupScore/absolute/certificate",
-    component: MakeupScoreAbsoluteCertificate,
+    path: "/makeupScore/certificate",
+    component: MakeupScoreCertificate,
     meta: { title: "Makeup Score Absolute", middleware: auth },
   },
   {

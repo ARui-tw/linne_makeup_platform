@@ -29,3 +29,7 @@ export function removeUser(api, data) {
 export function login(api, data) {
   return api("POST", "/user/login", data);
 }
+
+export function email(api, data) {
+  return api("POST", "/user/email", data);
+}
