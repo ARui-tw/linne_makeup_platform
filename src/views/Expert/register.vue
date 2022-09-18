@@ -170,7 +170,7 @@ const onFileChange_image = (e) => {
 
 const upload_image = async (file, profession_id) => {
   const result = await $api.artwork.createArtwork(file, {
-    fileName: file.name,
+    fileName: encodeURIComponent(file.name),
     profession_id,
     "Content-Type": file.type,
   });
@@ -182,12 +182,12 @@ const handleCreateProfession = async () => {
   const professionResult = await $api.profession.createProfession(
     certificate.value,
     {
-      title: UserData.value.title,
-      name: UserData.value.name,
-      email: UserData.value.email,
-      phone: UserData.value.phone,
-      description: UserData.value.description,
-      fileName: certificate.value.name,
+      title: encodeURIComponent(UserData.value.title),
+      name: encodeURIComponent(UserData.value.name),
+      email: encodeURIComponent(UserData.value.email),
+      phone: encodeURIComponent(UserData.value.phone),
+      description: encodeURIComponent(UserData.value.description),
+      fileName: encodeURIComponent(certificate.value.name),
       "Content-Type": certificate.value.type,
     }
   );
