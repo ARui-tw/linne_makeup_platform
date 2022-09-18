@@ -8,20 +8,13 @@
       height="750"
       type="application/pdf"
     /> -->
-    <object
-      data="mypdf.pdf"
-      type="application/pdf"
-      frameborder="0"
-      width="100%"
-      height="750"
-      style="padding: 20px"
-    >
+    <div class="h-2/3 w-full p-5" style="padding: 20px">
       <embed
         src="https://drive.google.com/file/d/1axVvYYn-cWNlojLNMUlTW8PvtLwneXNE/preview?usp=sharing"
         width="100%"
         height="600px"
       />
-    </object>
+    </div>
   </div>
   <!-- <div class="max-w-4xl bg-gray-100 p-10 md:ml-20">
     <div class="text-2xl">蒐集個人資料告知事項暨個人資料提供同意書</div>
