@@ -14,7 +14,7 @@
           >
             <img
               :src="`${$baseURL}${pro.imagePhotoUrl}`"
-              style="width: 300px"
+              style="width: 300px; max-width: 100%; max-height: 100%"
             />
           </div>
           <div class="text-right">{{ pro.title }}</div>

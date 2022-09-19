@@ -32,6 +32,7 @@
               <img
                 :src="`${$baseURL}${item.url}`"
                 :style="item.rank ? 'filter: opacity(60%)' : ''"
+                style="max-width: 100%; max-height: 100%"
               />
             </div>
           </div>

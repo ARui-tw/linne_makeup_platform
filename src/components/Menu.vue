@@ -10,7 +10,11 @@
         <div class="text-gray-700">
           {{ menuItem.englishName }}
         </div>
-        <div class="text-black-100">
+        <div
+          :class="
+            menuItem.name === selectedMenu ? 'text-gray-700' : 'text-black-100'
+          "
+        >
           {{ menuItem.name }}
         </div>
       </router-link>
@@ -40,6 +44,9 @@
 
 <script setup>
 // import { Menu, MenuButton, MenuItems, MenuItem } from "@headlessui/vue";
+import { computed } from "vue";
+import { router } from "@/routes.js";
+
 const menuItems = [
   {
     name: "首頁故事",
@@ -76,10 +83,13 @@ const menuItems = [
     englishName: "Makeup Papers",
     path: "/makeupPapers",
   },
-  // {
-  //   name: "特殊榮譽",
-  //   englishName: "Awards",
-  //   path: "/awards",
-  // },
 ];
+
+const selectedMenu = computed(() => {
+  for (let i = 0; i < menuItems.length; i++) {
+    if (router.currentRoute.value.path.startsWith(menuItems[i].path)) {
+      return menuItems[i].name;
+    }
+  }
+});
 </script>

@@ -32,7 +32,11 @@
           style="width: 300px; height: 400px"
           class="flex items-center justify-center bg-gray-300 align-middle"
         >
-          <img v-if="url_before" :src="url_before" />
+          <img
+            v-if="url_before"
+            :src="url_before"
+            style="max-width: 100%; max-height: 100%"
+          />
         </div>
         <SizeBox height="20" />
         <input type="file" @change="onFileChange_before" style="width: 300px" />
@@ -45,7 +49,11 @@
           style="width: 300px; height: 400px"
           class="flex items-center justify-center bg-gray-300 align-middle"
         >
-          <img v-if="url_after" :src="url_after" />
+          <img
+            v-if="url_after"
+            :src="url_after"
+            style="max-width: 100%; max-height: 100%"
+          />
         </div>
         <SizeBox height="20" />
         <input type="file" @change="onFileChange_after" style="width: 300px" />
@@ -100,7 +108,10 @@
           style="width: 144px; height: 144px"
           class="flex items-center justify-center bg-gray-300 align-middle"
         >
-          <img :src="`${$baseURL}${keywordPhoto.url}`" />
+          <img
+            :src="`${$baseURL}${keywordPhoto.url}`"
+            style="max-width: 100%; max-height: 100%"
+          />
         </div>
       </div>
     </div>

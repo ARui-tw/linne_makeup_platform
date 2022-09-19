@@ -25,6 +25,7 @@
             <img
               :src="`${$baseURL}${item.url}`"
               :style="item.rank ? 'filter: opacity(70%)' : ''"
+              style="max-width: 100%; max-height: 100%"
             />
           </div>
           <SizeBox height="10" />
@@ -90,7 +91,7 @@ import { ref } from "vue";
 import absolute_bg from "@/assets/img/absolute_bg.svg";
 import SizeBox from "@/components/SizeBox.vue";
 
-const options = ["0", "1", "2", "3", "4", "5", "無法判斷"];
+const options = ["1", "2", "3", "4", "5", "無法判斷"];
 
 const set = ref([]);
 const getRandomPhoto = async () => {

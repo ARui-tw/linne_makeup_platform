@@ -9,11 +9,13 @@
       type="application/pdf"
     /> -->
     <div class="h-2/3 w-full p-5" style="padding: 20px">
-      <embed
-        src="https://drive.google.com/file/d/1axVvYYn-cWNlojLNMUlTW8PvtLwneXNE/preview?usp=sharing"
+      <iframe
+        src="https://drive.google.com/file/d/1QKQz8ChNn9rovYuZvcHgnVqQ3TFN1o6G/preview"
         width="100%"
         height="600px"
-      />
+        allow="autoplay"
+      >
+      </iframe>
     </div>
   </div>
   <!-- <div class="max-w-4xl bg-gray-100 p-10 md:ml-20">

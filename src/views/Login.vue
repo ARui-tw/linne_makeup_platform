@@ -73,7 +73,8 @@ const handleLogin = async () => {
       await $cookies.set("token", result.token);
       const currentUser = await $api.user.getCurrentUser();
       await $cookies.set("user_id", currentUser._id);
-      router.push("/account");
+      await $cookies.set("user_name", currentUser.name);
+      router.go("/account");
     } else {
       alert("帳號或密碼錯誤");
     }

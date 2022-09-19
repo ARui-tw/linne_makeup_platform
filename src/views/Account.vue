@@ -57,13 +57,19 @@
       <SizeBox width="50" height="30" />
       <div>
         <div class="text-lg font-bold">個人相簿區/可提供化妝歷程回顧</div>
-        <div class="grid grid-cols-2 gap-1 lg:grid-cols-3 lg:gap-2">
+        <div
+          class="grid grid-cols-2 gap-1 lg:grid-cols-3 lg:gap-2"
+          style="height: 294px"
+        >
           <div v-for="photo in photos" class="my-1">
             <div
               style="width: 100px; height: 135px"
               class="flex items-center justify-center bg-gray-300 align-middle"
             >
-              <img :src="`${$baseURL}${photo.url}`" style="width: 100px" />
+              <img
+                :src="`${$baseURL}${photo.url}`"
+                style="width: 100px; max-width: 100%; max-height: 100%"
+              />
             </div>
           </div>
         </div>
@@ -72,7 +78,7 @@
           <div class="flex w-full text-black">
             <div
               @click="handleNext"
-              v-show="totalPhotos > offset + 12"
+              v-show="totalPhotos > offset + 6"
               class="cursor-pointer bg-gray-50 px-2 py-1 text-sm"
             >
               下一頁
@@ -138,7 +144,7 @@ const getUserData = async () => {
 const getUserPhotos = async () => {
   const photos_result = await $api.photo.getPhotos({
     filter: { provided_user: userData.value._id },
-    limit: 12,
+    limit: 6,
   });
   photos.value = photos_result.data;
   totalPhotos.value = photos_result.total;
@@ -152,10 +158,10 @@ const getData = async () => {
 getData();
 
 const handleNext = async () => {
-  offset.value += 12;
+  offset.value += 6;
   const photos_result = await $api.photo.getPhotos({
     filter: { provided_user: userData.value._id },
-    limit: 12,
+    limit: 6,
     skip: offset.value,
   });
   photos.value = photos_result.data;
@@ -184,6 +190,7 @@ const handleEdit = async () => {
 const handleLogout = async () => {
   await $cookies.remove("token");
   await $cookies.remove("user_id");
-  router.push("/");
+  await $cookies.remove("user_name");
+  router.go("/");
 };
 </script>
