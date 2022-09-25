@@ -185,9 +185,22 @@ const handleEdit = async () => {
     post_address: userData.value.post_address,
     title: userData.value.title,
   };
-  await $api.user.modifyCurrentUser(modifyData);
-  await getUserData();
-  editEnable.value = false;
+
+  if (userData.value.name === "") {
+    alert("請輸入姓名");
+    return;
+  }
+
+  const emailValidate =
+    /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+  if (emailValidate.test(userData.value.email)) {
+    await $api.user.modifyCurrentUser(modifyData);
+    await getUserData();
+    editEnable.value = false;
+  } else {
+    alert("請輸入正確的電郵地址");
+  }
 };
 
 const handleLogout = async () => {
