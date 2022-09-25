@@ -35,6 +35,4 @@ onMounted(async () => {
   user.value = user_result;
   artworks.value = artworks_result.data;
 });
-
-// getProfession();
 </script>
