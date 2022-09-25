@@ -178,7 +178,6 @@ const upload_image = async (file, profession_id) => {
 };
 
 const handleCreateProfession = async () => {
-  console.log(certificate.value);
   const professionResult = await $api.profession.createProfession(
     certificate.value,
     {
@@ -205,6 +204,9 @@ const handleCreateProfession = async () => {
   Object.keys(artworks.value).forEach(async (key) => {
     await upload_image(artworks.value[key], professionResult._id);
   });
+
+  await $api.user.email({ type: "profession" });
+
   router.push("/expert");
 };
 </script>
