@@ -237,11 +237,7 @@ const handleCreateProfession = async () => {
     await upload_image(artworks.value[key], professionResult._id);
   });
 
-<<<<<<< HEAD
-=======
   await $api.user.email({ type: "profession" });
-
->>>>>>> dev
   router.push("/expert");
 };
 </script>
