@@ -95,6 +95,17 @@ const getUserData = async () => {
 getUserData();
 
 const handleSend = async () => {
+  const emailValidate =
+    /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+  if (!emailValidate.test(userData.value.email)) {
+    alert("請輸入正確的電郵地址");
+    return;
+  } else if (userData.value.name === "") {
+    alert("請輸入姓名");
+    return;
+  }
+
   try {
     await $api.user.modifyUser(userData.value);
     await $api.user.email({ type: "upload_certificate" });
