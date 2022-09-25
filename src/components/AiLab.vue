@@ -1,12 +1,15 @@
 <template>
-  <div
-    class="ml-0 flex w-full flex-row bg-local bg-left-top bg-no-repeat md:ml-4"
-    :style="
-      breakpoints.md ? { backgroundImage: `url(${backgroundImage})` } : {}
-    "
-  >
-    <SizeBox width="290" class="shrink-0" v-show="breakpoints.md" />
-    <slot />
+  <div class="flex flex-row">
+    <SizeBox :width="breakpoints.md ? 16 : 0" />
+    <div
+      class="flex w-full flex-row bg-local bg-left-top bg-no-repeat"
+      :style="
+        breakpoints.md ? { backgroundImage: `url(${backgroundImage})` } : {}
+      "
+    >
+      <SizeBox width="290" class="shrink-0" v-show="breakpoints.md" />
+      <slot />
+    </div>
   </div>
 </template>
 
