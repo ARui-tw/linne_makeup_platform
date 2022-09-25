@@ -97,7 +97,12 @@ getUserData();
 
 const handleSend = async () => {
   try {
-    await $api.user.modifyUser(userData.value);
+    await $api.user.modifyCurrentUser({
+      name: userData.value.name,
+      phone: userData.value.phone,
+      email: userData.value.email,
+      post_address: userData.value.post_address,
+    });
     await $api.user.email({ type: "score_certificate" });
     router.push("/");
   } catch (error) {
