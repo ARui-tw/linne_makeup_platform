@@ -7,17 +7,21 @@
         :width="breakpoints.md ? 350 : breakpoints.sm ? 250 : 200"
       />
     </router-link>
-    <router-link to="/login">
-      <div class="text-lg font-extrabold text-brown-400">
-        <!-- <img
+    <div class="text-lg font-extrabold text-brown-400">
+      <!-- <img
           src="@/assets/img/login_btn.svg"
           alt="login_btn"
           :width="breakpoints.md ? 200 : breakpoints.sm ? 150 : 100"
         /> -->
-        <div v-if="user_name">Welcome, {{ user_name }}</div>
-        <div v-else>登入/ 註冊</div>
+      <div v-if="user_name">
+        <router-link to="/account"> Welcome, {{ user_name }} </router-link>
       </div>
-    </router-link>
+      <div v-else>
+        <router-link to="/login"> 登入 </router-link>
+        /
+        <router-link to="/register"> 註冊 </router-link>
+      </div>
+    </div>
   </div>
 </template>
 
