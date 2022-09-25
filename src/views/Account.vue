@@ -55,11 +55,11 @@
         </div>
       </div>
       <SizeBox width="50" height="30" />
-      <div>
+      <div class="min-w-fit">
         <div class="text-lg font-bold">個人相簿區/可提供化妝歷程回顧</div>
         <div
           class="grid grid-cols-2 gap-1 lg:grid-cols-3 lg:gap-2"
-          style="height: 294px"
+          :style="breakpoints.lg ? { height: '294px' } : {}"
         >
           <div v-for="photo in photos" class="my-1">
             <div
@@ -102,6 +102,9 @@
 import { router } from "@/routes";
 import { ref } from "vue";
 import SizeBox from "@/components/SizeBox.vue";
+import useBreakpoint from "@/plugins/breakpoints";
+
+const breakpoints = useBreakpoint();
 
 const fields = [
   {
