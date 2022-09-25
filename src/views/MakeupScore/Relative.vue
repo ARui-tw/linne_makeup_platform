@@ -1,7 +1,7 @@
 <template>
   <div
     :style="{ backgroundImage: `url(${bottleBG})` }"
-    class="ml-5 bg-repeat-y p-14 md:ml-20"
+    class="ml-5 bg-no-repeat px-14 pt-14 pb-3 md:ml-20"
   >
     <div class="text-2xl">
       相對分數 <br />
@@ -43,7 +43,7 @@
           </div>
         </div>
       </div>
-      <div class="flex w-full flex-col items-end">
+      <div class="flex w-full flex-col items-end pt-6">
         <div
           @click="getRandomPhoto"
           class="w-32 cursor-pointer bg-gray-50 px-4 py-2 text-lg"
@@ -61,7 +61,7 @@
     </div>
   </div>
   <SizeBox height="30" />
-  <div class="ml-5 flex justify-around md:ml-20" style="max-width: 520px">
+  <div class="ml-5 flex justify-around md:ml-20" style="max-width: 595.722px">
     <router-link
       to="/makeupScore/certificate"
       class="min-w-fit bg-gray-200 px-4 py-2 text-lg"
