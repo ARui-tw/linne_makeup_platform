@@ -1,5 +1,5 @@
 <template>
-  <div class="my-20 ml-4">
+  <div class="my-20 ml-4 w-10/12">
     <div class="text-2xl font-bold">{{ user.title }}</div>
     <div class="whitespace-pre-wrap">
       {{ profession.description }}
