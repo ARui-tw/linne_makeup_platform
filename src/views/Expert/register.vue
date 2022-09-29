@@ -122,7 +122,7 @@ import SizeBox from "@/components/SizeBox.vue";
 import { router } from "@/routes";
 import { ref } from "vue";
 
-const artworks = ref({});
+const artworks = ref([]);
 const imagePhoto = ref({});
 const certificate = ref({});
 const UserData = ref({
@@ -178,7 +178,38 @@ const upload_image = async (file, profession_id) => {
 };
 
 const handleCreateProfession = async () => {
-  console.log(certificate.value);
+  const emailValidate =
+    /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+  if (UserData.value.title === "") {
+    alert("請輸入團隊名稱");
+    return;
+  } else if (UserData.value.name === "") {
+    alert("請輸入負責人");
+    return;
+  } else if (UserData.value.phone === "") {
+    alert("請輸入電話");
+    return;
+  } else if (UserData.value.email === "") {
+    alert("請輸入電郵");
+    return;
+  } else if (UserData.value.description === "") {
+    alert("請輸入頁面介紹文");
+    return;
+  } else if (!emailValidate.test(UserData.value.email)) {
+    alert("請輸入正確電郵");
+    return;
+  } else if (artworks.value.length === 0) {
+    alert("請上傳參展作品");
+    return;
+  } else if (certificate.value === {} || certificate.value === undefined) {
+    alert("請上傳證照");
+    return;
+  } else if (imagePhoto.value === {} || imagePhoto.value === undefined) {
+    alert("請上傳團隊照片");
+    return;
+  }
+
   const professionResult = await $api.profession.createProfession(
     certificate.value,
     {
@@ -205,6 +236,8 @@ const handleCreateProfession = async () => {
   Object.keys(artworks.value).forEach(async (key) => {
     await upload_image(artworks.value[key], professionResult._id);
   });
+
+  await $api.user.email({ type: "profession" });
   router.push("/expert");
 };
 </script>

@@ -117,7 +117,7 @@ const menuItems = ref([
     // name: "特殊榮譽",
     // englishName: "Awards",
     // path: "/awards",
-    hover: true,
+    hover: false,
     explainText: "以大數據做應用美學證據 探索未來彩妝 <br /><br />",
     // explainText: "忘記背後 努力向前 向著標竿直跑",
     svgName: "awards",
