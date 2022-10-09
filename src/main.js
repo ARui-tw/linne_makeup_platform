@@ -1,15 +1,20 @@
-import { createApp } from 'vue'
-import './tailwind.css'
-import App from './App.vue'
-import { routes } from './routes.js'
-import { createRouter, createWebHistory } from 'vue-router'
+import { createApp } from "vue";
+import VueCookies from "vue-cookies";
+import "./tailwind.css";
+import App from "./App.vue";
+import { router } from "./routes.js";
+import store from "./store";
+import axios from "axios";
+import VueAxios from "vue-axios";
+import api from "./api";
 
-const app = createApp(App)
+const app = createApp(App);
 
-const router = createRouter({
-  history: createWebHistory(),
-  routes,
-})
+app
+  .use(router)
+  .use(store)
+  .use(VueAxios, axios)
+  .use(VueCookies, { expire: "2m" })
+  .use(api);
 
-app.use(router)
-app.mount('#app')
+app.mount("#app");

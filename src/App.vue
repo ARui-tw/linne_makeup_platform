@@ -1,27 +1,27 @@
-<script setup>
-import { ref } from 'vue'
-
-let counter = ref(0)
-
-setInterval(() => {
-  counter.value++
-}, 1000)
-</script>
-
 <template>
   <div>
-    <header class="bg-white shadow" v-if="$route.meta.title">
-      <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-        <h1
-          @click="counter = 0"
-          class="text-3xl font-bold leading-tight text-gray-900"
-        >
-          {{ $route.meta.title }} / {{ counter }}
-        </h1>
+    <div class="mx-4 sm:mx-5 md:mx-7">
+      <Header />
+      <Menu />
+      <SizeBox height="20" />
+      <div class="max-h-72 w-full justify-center overflow-hidden">
+        <img src="@/assets/img/index_img.svg" alt="" class="w-full" />
       </div>
-    </header>
-    <main>
-      <router-view />
-    </main>
+      <SizeBox height="20" />
+    </div>
+    <AiLab>
+      <main class="w-full">
+        <router-view />
+      </main>
+    </AiLab>
+    <Footer />
   </div>
 </template>
+
+<script setup>
+import Footer from "@/components/Footer.vue";
+import Header from "@/components/Header.vue";
+import Menu from "@/components/Menu.vue";
+import SizeBox from "./components/SizeBox.vue";
+import AiLab from "./components/AiLab.vue";
+</script>
