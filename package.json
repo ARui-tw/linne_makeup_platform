@@ -7,7 +7,7 @@
     "serve": "vite preview --host"
   },
   "dependencies": {
-    "axios": "^0.27.2",
+    "axios": "^1.2.3",
     "vue": "^3.2.39",
     "vue-axios": "^3.4.1",
     "vue-cookies": "^1.8.1",
